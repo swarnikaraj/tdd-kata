@@ -21,4 +21,5 @@ def test_handle_newlines_between_numbers():
 
 def test_support_different_delimiters():
     calculator=StringCalculator()
-    assert calculator.add("//;\n1;2")==3    
+    assert calculator.add("//;\n1;2")==3
+    assert calculator.add("//|\n1|2|3") == 6
