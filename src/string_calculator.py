@@ -9,12 +9,12 @@ class StringCalculator:
         try:
             delimiters=self.default_delimiters
             if numbers.startswith("//"):
-                print("has // 12")
+                
                 custom_delimiter, numbers = self._extract_delimiters(numbers)
-                print(custom_delimiter, 18)
-                print(numbers, 19)
+                
+                
                 delimiters = custom_delimiter + self.default_delimiters
-                print(delimiters, 20)
+                
             nums=self._parse_numbers(numbers, delimiters)
             self._validate_negative_numbers(nums)
             return sum(nums)
@@ -23,17 +23,15 @@ class StringCalculator:
             
     
     def _parse_numbers(self, numbers:str, delimiters:list[str])->list:
-        print(numbers, 23)
+        
         for delimiter in delimiters[1:]:
             numbers = numbers.replace(delimiter,delimiters[0])
-            print(numbers,24)
+            
 
         return [num for num in [int(n) for n in numbers.split(delimiters[0])] if num<=1000]
     
     def _extract_delimiters(self, numbers: str) -> tuple[list[str], str]:
-        print("==========")
-        print(numbers, 29)
-        print("=========")
+       
         if numbers[2]=="[":
             delimiters=[]
             curr=2
@@ -44,7 +42,7 @@ class StringCalculator:
             
             
             numbers = numbers[curr + 1:]  # \n
-            print(numbers, "numbers at 44")
+            
             return delimiters, numbers
             
         else:
