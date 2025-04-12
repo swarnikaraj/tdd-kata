@@ -23,3 +23,9 @@ def test_support_different_delimiters():
     calculator=StringCalculator()
     assert calculator.add("//;\n1;2")==3
     assert calculator.add("//|\n1|2|3") == 6
+
+def test_negative_numbers():
+    calculator=StringCalculator()
+    with pytest.raises(ValueError) as e:
+        calculator.add("-1,2,3,-4")
+    assert str(e.value) == "negatives not allowed: -1, -4"

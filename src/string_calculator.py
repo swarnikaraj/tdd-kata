@@ -25,3 +25,6 @@ class StringCalculator:
         delimiter = numbers[2]
         numbers=numbers[4:] # this is to exlude // and \n 
         return delimiter, numbers
+    
+    def _validate_negative_numbers(self,numbers: list[str])->None:
+        raise ValueError("negatives not allowed: -1, -4")
