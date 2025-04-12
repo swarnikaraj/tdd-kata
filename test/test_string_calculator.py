@@ -39,3 +39,8 @@ def test_any_length_delimiter():
     calculator=StringCalculator()
     assert calculator.add("//[***]\n1***2***3")==6
     assert calculator.add("//[###]\n4###5###6") == 15
+
+def test_multiple_delimiters():
+    calculator=StringCalculator()
+    assert calculator.add("//[*][%]\n1*2%3")==6
+    assert calculator.add("//[***][###]\n4***5###6") == 15

@@ -13,7 +13,7 @@ class StringCalculator:
                 custom_delimiter, numbers = self._extract_delimiters(numbers)
                 print(custom_delimiter, 18)
                 print(numbers, 19)
-                delimiters = [custom_delimiter] + self.default_delimiters
+                delimiters = custom_delimiter + self.default_delimiters
                 print(delimiters, 20)
             nums=self._parse_numbers(numbers, delimiters)
             self._validate_negative_numbers(nums)
@@ -30,20 +30,25 @@ class StringCalculator:
 
         return [num for num in [int(n) for n in numbers.split(delimiters[0])] if num<=1000]
     
-    def _extract_delimiters(self, numbers:str)->list:
+    def _extract_delimiters(self, numbers: str) -> tuple[list[str], str]:
         print("==========")
         print(numbers, 29)
         print("=========")
         if numbers[2]=="[":
-            print("has [")
-            end_brack=numbers.index("]")
-            print(end_brack,"end brank index")
-            delimiter=numbers[3:end_brack]
-            print(delimiter, "delimiter at 42")
-            numbers=numbers[end_brack+2:]  #excluding ] and \n
+            delimiters=[]
+            curr=2
+            while numbers[curr]=="[":
+                end_brack = numbers.index(']', curr)
+                delimiters.append(numbers[curr + 1:end_brack])
+                curr = end_brack + 1
+            
+            
+            numbers = numbers[curr + 1:]  # \n
             print(numbers, "numbers at 44")
+            return delimiters, numbers
+            
         else:
-            delimiter=numbers[2]
+            delimiter=[numbers[2]]
             numbers=numbers[4:] # this is to exlude // and \n 
         return delimiter, numbers
     
