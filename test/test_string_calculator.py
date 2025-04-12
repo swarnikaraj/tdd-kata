@@ -29,3 +29,8 @@ def test_negative_numbers():
     with pytest.raises(ValueError) as e:
         calculator.add("-1,2,3,-4")
     assert str(e.value) == "negatives not allowed: -1, -4"
+
+def test_ignore_number_bigger_than_1000():
+    calculator=StringCalculator()
+    assert calculator.add("2, 1001")==2
+    assert calculator.add("1000, 2")==1002

@@ -6,15 +6,17 @@ class StringCalculator:
     def add(self,numbers:str)->int:
         if not numbers:
             return 0
-        delimiters=self.default_delimiters
-        if numbers.startswith("//"):
-            try:
-                delimiter, numbers = self._extract_delimiters(numbers)
-                delimiters.append(delimiter)
-            except:
-                raise ValueError("Invalid input")
+        try:
+            delimiters=self.default_delimiters
+            if numbers.startswith("//"):
+                custom_delimiter, numbers = self._extract_delimiters(numbers)
+                delimiters = [custom_delimiter] + self.default_delimiters
+            nums=self._parse_numbers(numbers, delimiters)
+            self._validate_negative_numbers(nums)
+            return sum(nums)
+        except Exception as e:
+            raise ValueError(str(e))
             
-        return sum(self._parse_numbers(numbers, delimiters))
     
     def _parse_numbers(self, numbers:str, delimiters:list[str])->list:
         for delimiter in delimiters[1:]:
@@ -26,5 +28,7 @@ class StringCalculator:
         numbers=numbers[4:] # this is to exlude // and \n 
         return delimiter, numbers
     
-    def _validate_negative_numbers(self,numbers: list[str])->None:
-        raise ValueError("negatives not allowed: -1, -4")
+    def _validate_negative_numbers(self,numbers: list[int])->None:
+        negative_nums=[num for num in numbers if num<0]
+        if negative_nums:
+            raise ValueError(f"negatives not allowed: { ', '.join(map(str,negative_nums))}")
