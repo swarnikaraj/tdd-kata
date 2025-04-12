@@ -21,7 +21,9 @@ class StringCalculator:
     def _parse_numbers(self, numbers:str, delimiters:list[str])->list:
         for delimiter in delimiters[1:]:
             numbers = numbers.replace(delimiter,delimiters[0])
-        return [int(num) for num in numbers.split(delimiters[0])]
+            print(numbers,24)
+
+        return [num for num in [int(n) for n in numbers.split(delimiters[0])] if num<=1000]
     
     def _extract_delimiters(self, numbers:str)->list:
         delimiter = numbers[2]
