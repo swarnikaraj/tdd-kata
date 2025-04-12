@@ -38,3 +38,4 @@ def test_ignore_number_bigger_than_1000():
 def test_any_length_delimiter():
     calculator=StringCalculator()
     assert calculator.add("//[***]\n1***2***3")==6
+    assert calculator.add("//[###]\n4###5###6") == 15
